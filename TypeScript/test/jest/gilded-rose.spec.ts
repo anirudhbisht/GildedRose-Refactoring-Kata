@@ -1,4 +1,5 @@
 import { Item, GildedRose, BrieItem, BackstageItem, SulfurasItem, ConjurItem } from '@/gilded-rose';
+import { getImpliedNodeFormatForFile } from 'typescript';
 
 describe ('AgedBrie', () => {
   it('increases in Quality the older it gets', () => {
@@ -54,4 +55,29 @@ describe ('Conjured', () => {
     expect(conjuredItem.quality).toBe(quality - 2)
     expect(conjuredItem.sellIn).toBe(sellIn - 1)
   })
+})
+
+describe('GildedRose', () => {
+  let gildedRose
+
+  before (() => {
+    gildedRose = new GildedRose([
+      new Item('Aged Brie', 1, 0),
+      new Item('Sulfuras, Hand of Ragnaros', 1,0),
+      new Item('Conjured', 1, 0),
+      new Item('Backstage passes to a TAFKAL80ETC concert', 1, 0) 
+    ])
+  })
+
+  it('instantiates items of correct classes', () => {
+    expect(gildedRose.items[0]).toBeInstanceOf(BrieItem)
+    expect(gildedRose.items[1]).toBeInstanceOf(SulfurasItem)
+    expect(gildedRose.items[2]).toBeInstanceOf(ConjurItem)
+    expect(gildedRose.items[3]).toBeInstanceOf(BackstageItem)
+  })
+
+  it('updates the quality of all items', () => {
+    const items = gildedRose.updateQuality()
+    // gildedRose = 
+  }) 
 })
