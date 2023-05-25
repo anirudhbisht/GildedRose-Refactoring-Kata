@@ -14,4 +14,13 @@ describe('Gilded Rose', () => {
     items = gildedRose.updateQuality();
     expect(items[0].quality).toBe(97)    
   })
+
+  it('The Quality of an item is never negative', () => {
+    let item = new Item('foo', 1, 1)
+    const gildedRose = new GildedRose([item])
+    gildedRose.updateQuality()
+    const items = gildedRose.updateQuality()
+
+    expect(items[0].quality).not.toBeLessThan(0)
+  })
 });
